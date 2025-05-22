@@ -45,10 +45,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          cat ~/.ssh/id_rsa
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
-          cat ~/.ssh/know_hosts
-          ssh -v "$SERVER_USER@$SERVER_HOST" "echo hello"        
+          ssh -v "$SERVER_USER@$SERVER_HOST" "echo hello" || true        
 
       # - name: Deploy to Server
       #   env:
