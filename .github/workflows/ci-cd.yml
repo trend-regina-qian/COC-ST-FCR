@@ -49,7 +49,7 @@ jobs:
           ssh "$SERVER_USER@$SERVER_HOST" << 'EOF'
           set -e
           cd /opt/monitoring-platform || { mkdir -p /opt/monitoring-platform && cd /opt/monitoring-platform; }
-          git pull origin main || git clone <repository-url> .
+          git pull origin fcr-dev || git clone -b fcr-dev https://github.com/trend-regina-qian/COC-ST-FCR.git .
           docker-compose down || true
           docker-compose up -d --build
           EOF
