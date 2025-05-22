@@ -45,8 +45,9 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
-
-          ssh "$SERVER_USER@$SERVER_HOST" "echo hello"
+          cat ~/.ssh/id_rsa | head -5
+          cat ~/.ssh/known_hosts
+          ssh -v "$SERVER_USER@$SERVER_HOST" "echo hello"
           # ssh "$SERVER_USER@$SERVER_HOST" << 'EOF'
           # set -e
           # cd /opt/monitoring-platform || { mkdir -p /opt/monitoring-platform && cd /opt/monitoring-platform; }
