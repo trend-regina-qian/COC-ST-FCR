@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - fcr-dev
   pull_request:
     branches:
-      - main
+      - fcr-dev
 
 jobs:
   test:
