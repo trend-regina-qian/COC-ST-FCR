@@ -1,0 +1,22 @@
+groups:
+  - name: EndpointIPChanges
+    rules:
+      - alert: HighIPChangeRate
+        expr: rate(endpoint_ip_changes[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High IP address change rate detected"
+          description: "Endpoint {{ $labels.endpoint_id }} in managed_endpoints has a high rate of IP address changes."
+
+  - name: DataSyncDelay
+    rules:
+      - alert: DataSyncDelayExceeded
+        expr: data_sync_delay > 86400
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Data synchronization delay exceeded"
+          description: "Data synchronization delay for topo_id {{ $labels.topo_id }} has exceeded 24 hours."

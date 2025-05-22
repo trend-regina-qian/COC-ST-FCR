@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  monitoring-platform:
+    build:
+      context: .
+    container_name: monitoring-platform
+    ports:
+      - "8000:8000" # Expose Prometheus metrics
+    environment:
+      - CONFIG_FILE=/config/config.ini
+    volumes:
+      - ./src/config:/config
+    command: python src/main.py # Run the monitoring platform
+    restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000" # Expose Grafana on port 3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: always
+
+volumes:
+  grafana-data:
