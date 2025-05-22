@@ -46,10 +46,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
 
-          ssh "$SERVER_USER@$SERVER_HOST" << 'EOF'
-          set -e
-          cd /opt/monitoring-platform || { mkdir -p /opt/monitoring-platform && cd /opt/monitoring-platform; }
-          git pull origin fcr-dev || git clone -b fcr-dev https://github.com/trend-regina-qian/COC-ST-FCR.git .
-          docker-compose down || true
-          docker-compose up -d --build
-          EOF
+          ssh "$SERVER_USER@$SERVER_HOST" "ls /opt"
+          # ssh "$SERVER_USER@$SERVER_HOST" << 'EOF'
+          # set -e
+          # cd /opt/monitoring-platform || { mkdir -p /opt/monitoring-platform && cd /opt/monitoring-platform; }
+          # git pull origin fcr-dev || git clone -b fcr-dev https://github.com/trend-regina-qian/COC-ST-FCR.git .
+          # docker-compose down || true
+          # docker-compose up -d --build
+          # EOF
