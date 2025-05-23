@@ -41,12 +41,15 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
+          set +e
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "SSH private key size: $(wc -c < ~/.ssh/id_rsa)"
+          head -n 2 ~/.ssh/id_rsa          
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
-          echo "$SERVER_HOST"     
-          ssh -v "$SERVER_USER@$SERVER_HOST" "echo hello" || true        
+          echo "Trying to connect to $SERVER_USER@$SERVER_HOST"
+          ssh -vvv "$SERVER_USER@$SERVER_HOST" "echo hello"       
       # - name: Deploy to Server
       #   env:
       #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
